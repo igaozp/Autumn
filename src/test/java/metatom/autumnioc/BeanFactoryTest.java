@@ -1,5 +1,7 @@
-package metatom;
+package metatom.autumnioc;
 
+import metatom.autumnioc.factory.AutowireCapableBeanFactory;
+import metatom.autumnioc.factory.BeanFactory;
 import org.junit.Test;
 
 /**
@@ -11,10 +13,11 @@ public class BeanFactoryTest {
     @Test
     public void test() {
         // 初始化 BeanFactory
-        BeanFactory beanFactory = new BeanFactory();
+        BeanFactory beanFactory = new AutowireCapableBeanFactory();
 
         // 注入 Bean
-        BeanDefinition beanDefinition = new BeanDefinition(new HelloWorldService());
+        BeanDefinition beanDefinition = new BeanDefinition();
+        beanDefinition.setBeanClassName("metatom.autumnioc.HelloWorldService");
         beanFactory.registerBeanDefinition("helloWorldService", beanDefinition);
 
         // 获取 Bean
