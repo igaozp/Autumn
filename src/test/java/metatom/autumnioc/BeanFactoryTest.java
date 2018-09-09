@@ -2,7 +2,11 @@ package metatom.autumnioc;
 
 import metatom.autumnioc.factory.AutowireCapableBeanFactory;
 import metatom.autumnioc.factory.BeanFactory;
+import metatom.autumnioc.io.ResourceLoader;
+import metatom.autumnioc.xml.XmlBeanDefinitionReader;
 import org.junit.Test;
+
+import java.util.Map;
 
 /**
  * BeanFactoryTest
@@ -12,20 +16,15 @@ import org.junit.Test;
 public class BeanFactoryTest {
     @Test
     public void test() throws Exception {
-        // 初始化 BeanFactory
+        // 读取配置文件
+        XmlBeanDefinitionReader xmlBeanDefinitionReader = new XmlBeanDefinitionReader(new ResourceLoader());
+        xmlBeanDefinitionReader.loadBeanDefinitions("autumnioc.xml");
+
+        // 初始化 BeanFactory 并注册 Bean
         BeanFactory beanFactory = new AutowireCapableBeanFactory();
-
-        // 注入 Bean
-        BeanDefinition beanDefinition = new BeanDefinition();
-        beanDefinition.setBeanClassName("metatom.autumnioc.HelloWorldService");
-
-        // 设置属性
-        PropertyValues propertyValues = new PropertyValues();
-        propertyValues.addPropertyValue(new PropertyValue("text", "Hello World!"));
-        beanDefinition.setPropertyValues(propertyValues);
-
-        // 生成 Bean
-        beanFactory.registerBeanDefinition("helloWorldService", beanDefinition);
+        for (Map.Entry<String, BeanDefinition> beanDefinitionEntry : xmlBeanDefinitionReader.getRegistry().entrySet()) {
+            beanFactory.registerBeanDefinition(beanDefinitionEntry.getKey(), beanDefinitionEntry.getValue());
+        }
 
         // 获取 Bean
         HelloWorldService helloWorldService = (HelloWorldService) beanFactory.getBean("helloWorldService");
