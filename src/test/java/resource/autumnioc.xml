@@ -13,7 +13,12 @@
 	   http://www.springframework.org/schema/context
 	   http://www.springframework.org/schema/context/spring-context-2.5.xsd">
 
+    <bean name="outputService" class="metatom.autumnioc.OutputService">
+        <property name="helloWorldService" ref="helloWorldService"/>
+    </bean>
+
     <bean name="helloWorldService" class="metatom.autumnioc.HelloWorldService">
-        <property name="text" value="Hello World!"></property>
+        <property name="text" value="Hello World!"/>
+        <property name="outputService" ref="outputService"/>
     </bean>
 </beans>

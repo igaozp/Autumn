@@ -7,6 +7,11 @@ import org.junit.Test;
 
 import java.util.Map;
 
+/**
+ * XmlBeanDefinitionReaderTest
+ *
+ * @author igaozp
+ */
 public class XmlBeanDefinitionReaderTest {
     @Test
     public void test() throws Exception {

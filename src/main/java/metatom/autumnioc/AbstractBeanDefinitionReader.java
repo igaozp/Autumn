@@ -5,6 +5,11 @@ import metatom.autumnioc.io.ResourceLoader;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * AbstractBeanDefinitionReader
+ *
+ * @author igaozp
+ */
 public abstract class AbstractBeanDefinitionReader implements BeanDefinitionReader {
     private Map<String, BeanDefinition> registry;
 

@@ -10,6 +10,8 @@ import java.io.InputStream;
  */
 public interface Resource {
     /**
+     * 获取资源的输入流
+     *
      * @return 输入流
      * @throws IOException IO 异常
      */

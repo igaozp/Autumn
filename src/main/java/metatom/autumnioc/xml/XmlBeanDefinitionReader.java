@@ -2,6 +2,7 @@ package metatom.autumnioc.xml;
 
 import metatom.autumnioc.AbstractBeanDefinitionReader;
 import metatom.autumnioc.BeanDefinition;
+import metatom.autumnioc.BeanReference;
 import metatom.autumnioc.PropertyValue;
 import metatom.autumnioc.io.ResourceLoader;
 import org.w3c.dom.Document;
@@ -13,6 +14,11 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.InputStream;
 
+/**
+ * XmlBeanDefinitionReader
+ *
+ * @author igaozp
+ */
 public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
     public XmlBeanDefinitionReader(ResourceLoader resourceLoader) {
         super(resourceLoader);
@@ -66,7 +72,16 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
                 Element propertyElement = (Element) node;
                 String name = propertyElement.getAttribute("name");
                 String value = propertyElement.getAttribute("value");
-                beanDefinition.getPropertyValues().addPropertyValue(new PropertyValue(name, value));
+                if (value != null && value.length() > 0) {
+                    beanDefinition.getPropertyValues().addPropertyValue(new PropertyValue(name, value));
+                } else {
+                    String ref = propertyElement.getAttribute("ref");
+                    if (ref == null || ref.length() == 0) {
+                        throw new IllegalArgumentException("Configuration problem: <property> element for property '" + name + "' must specify a ref or value");
+                    }
+                    BeanReference beanReference = new BeanReference(ref);
+                    beanDefinition.getPropertyValues().addPropertyValue(new PropertyValue(name, beanReference));
+                }
             }
         }
     }
