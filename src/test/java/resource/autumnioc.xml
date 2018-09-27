@@ -17,7 +17,7 @@
         <property name="helloWorldService" ref="helloWorldService"/>
     </bean>
 
-    <bean name="helloWorldService" class="metatom.autumnioc.HelloWorldService">
+    <bean name="helloWorldService" class="metatom.autumnioc.HelloWorldServiceImpl">
         <property name="text" value="Hello World!"/>
         <property name="outputService" ref="outputService"/>
     </bean>
