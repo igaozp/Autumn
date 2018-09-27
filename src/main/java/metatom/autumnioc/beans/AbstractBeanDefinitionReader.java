@@ -1,6 +1,6 @@
-package metatom.autumnioc;
+package metatom.autumnioc.beans;
 
-import metatom.autumnioc.io.ResourceLoader;
+import metatom.autumnioc.beans.io.ResourceLoader;
 
 import java.util.HashMap;
 import java.util.Map;

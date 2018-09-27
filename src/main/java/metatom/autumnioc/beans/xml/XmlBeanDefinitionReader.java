@@ -1,10 +1,10 @@
-package metatom.autumnioc.xml;
+package metatom.autumnioc.beans.xml;
 
-import metatom.autumnioc.AbstractBeanDefinitionReader;
-import metatom.autumnioc.BeanDefinition;
+import metatom.autumnioc.beans.AbstractBeanDefinitionReader;
+import metatom.autumnioc.beans.BeanDefinition;
 import metatom.autumnioc.BeanReference;
-import metatom.autumnioc.PropertyValue;
-import metatom.autumnioc.io.ResourceLoader;
+import metatom.autumnioc.beans.PropertyValue;
+import metatom.autumnioc.beans.io.ResourceLoader;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;

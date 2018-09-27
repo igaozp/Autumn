@@ -1,4 +1,4 @@
-package metatom.autumnioc.io;
+package metatom.autumnioc.beans.io;
 
 import org.junit.Assert;
 import org.junit.Test;

@@ -1,10 +1,11 @@
 package metatom.autumnioc;
 
-import metatom.autumnioc.factory.AbstractBeanFactory;
-import metatom.autumnioc.factory.AutowireCapableBeanFactory;
-import metatom.autumnioc.factory.BeanFactory;
-import metatom.autumnioc.io.ResourceLoader;
-import metatom.autumnioc.xml.XmlBeanDefinitionReader;
+import metatom.autumnioc.beans.BeanDefinition;
+import metatom.autumnioc.beans.factory.AbstractBeanFactory;
+import metatom.autumnioc.beans.factory.AutowireCapableBeanFactory;
+import metatom.autumnioc.beans.factory.BeanFactory;
+import metatom.autumnioc.beans.io.ResourceLoader;
+import metatom.autumnioc.beans.xml.XmlBeanDefinitionReader;
 import org.junit.Test;
 
 import java.util.Map;
@@ -22,7 +23,7 @@ public class BeanFactoryTest {
         xmlBeanDefinitionReader.loadBeanDefinitions("autumnioc.xml");
 
         // 初始化 BeanFactory 并注册 Bean
-        BeanFactory beanFactory = new AutowireCapableBeanFactory();
+        AbstractBeanFactory beanFactory = new AutowireCapableBeanFactory();
         for (Map.Entry<String, BeanDefinition> beanDefinitionEntry : xmlBeanDefinitionReader.getRegistry().entrySet()) {
             beanFactory.registerBeanDefinition(beanDefinitionEntry.getKey(), beanDefinitionEntry.getValue());
         }

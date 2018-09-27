@@ -1,6 +1,6 @@
-package metatom.autumnioc.factory;
+package metatom.autumnioc.beans.factory;
 
-import metatom.autumnioc.BeanDefinition;
+import metatom.autumnioc.beans.BeanDefinition;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,8 +29,8 @@ public abstract class AbstractBeanFactory implements BeanFactory {
         return bean;
     }
 
-    @Override
-    public void registerBeanDefinition(String name, BeanDefinition beanDefinition) throws Exception {
+
+    public void registerBeanDefinition(String name, BeanDefinition beanDefinition) {
         beanDefinitionMap.put(name, beanDefinition);
         beanDefinitionNames.add(name);
     }

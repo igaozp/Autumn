@@ -1,8 +1,8 @@
-package metatom.autumnioc.factory;
+package metatom.autumnioc.beans.factory;
 
-import metatom.autumnioc.BeanDefinition;
+import metatom.autumnioc.beans.BeanDefinition;
 import metatom.autumnioc.BeanReference;
-import metatom.autumnioc.PropertyValue;
+import metatom.autumnioc.beans.PropertyValue;
 
 import java.lang.reflect.Field;
 

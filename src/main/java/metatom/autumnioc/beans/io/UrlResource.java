@@ -1,4 +1,4 @@
-package metatom.autumnioc.io;
+package metatom.autumnioc.beans.io;
 
 import java.io.IOException;
 import java.io.InputStream;

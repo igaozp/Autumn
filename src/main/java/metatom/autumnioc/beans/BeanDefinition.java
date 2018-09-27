@@ -1,4 +1,4 @@
-package metatom.autumnioc;
+package metatom.autumnioc.beans;
 
 /**
  * @author igaozp

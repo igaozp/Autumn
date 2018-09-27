@@ -1,7 +1,7 @@
-package metatom.autumnioc.xml;
+package metatom.autumnioc.beans.xml;
 
-import metatom.autumnioc.BeanDefinition;
-import metatom.autumnioc.io.ResourceLoader;
+import metatom.autumnioc.beans.BeanDefinition;
+import metatom.autumnioc.beans.io.ResourceLoader;
 import org.junit.Assert;
 import org.junit.Test;
 
