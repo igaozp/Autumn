@@ -1,6 +1,9 @@
 package metatom.autumnioc.context;
 
+import metatom.autumnioc.beans.BeanPostProcessor;
 import metatom.autumnioc.beans.factory.AbstractBeanFactory;
+
+import java.util.List;
 
 /**
  * AbstractApplicationContext
@@ -15,7 +18,22 @@ public abstract class AbstractApplicationContext implements ApplicationContext {
     }
 
     public void refresh() throws Exception {
+        loadBeanDefinitions(beanFactory);
+        registerBeanPostProcessors(beanFactory);
+        onRefresh();
+    }
 
+    protected abstract void loadBeanDefinitions(AbstractBeanFactory beanFactory) throws Exception;
+
+    protected void registerBeanPostProcessors(AbstractBeanFactory beanFactory) throws Exception {
+        List beanPostProcessors = beanFactory.getBeansForType(BeanPostProcessor.class);
+        for (Object beanPostProcessor : beanPostProcessors) {
+            beanFactory.addBeanPostProcessor((BeanPostProcessor) beanPostProcessor);
+        }
+    }
+
+    protected void onRefresh() throws Exception {
+        beanFactory.preInstantiateSingletons();
     }
 
     @Override

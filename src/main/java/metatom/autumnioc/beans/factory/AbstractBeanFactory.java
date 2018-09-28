@@ -1,6 +1,7 @@
 package metatom.autumnioc.beans.factory;
 
 import metatom.autumnioc.beans.BeanDefinition;
+import metatom.autumnioc.beans.BeanPostProcessor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +16,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public abstract class AbstractBeanFactory implements BeanFactory {
     private Map<String, BeanDefinition> beanDefinitionMap = new ConcurrentHashMap<>();
     private final List<String> beanDefinitionNames = new ArrayList<>();
+    private List<BeanPostProcessor> beanPostProcessors = new ArrayList<>();
 
     @Override
     public Object getBean(String name) throws Exception {
@@ -25,6 +27,7 @@ public abstract class AbstractBeanFactory implements BeanFactory {
         Object bean = beanDefinition.getBean();
         if (bean == null) {
             bean = doCreateBean(beanDefinition);
+            initializeBean(bean, name);
         }
         return bean;
     }
@@ -41,6 +44,20 @@ public abstract class AbstractBeanFactory implements BeanFactory {
         }
     }
 
+    protected void initializeBean(Object bean, String name) throws Exception {
+        for (BeanPostProcessor beanPostProcessor : beanPostProcessors) {
+            bean = beanPostProcessor.postProcessBeforeInitialization(bean, name);
+        }
+
+        for (BeanPostProcessor beanPostProcessor : beanPostProcessors) {
+            bean = beanPostProcessor.postProcessAfterInitialization(bean, name);
+        }
+    }
+
+    protected Object createBeanInstance(BeanDefinition beanDefinition) throws Exception {
+        return beanDefinition.getBeanClass().newInstance();
+    }
+
     /**
      * 初始化 Bean
      *
@@ -48,5 +65,28 @@ public abstract class AbstractBeanFactory implements BeanFactory {
      * @return Object
      * @throws Exception 抛出异常
      */
-    protected abstract Object doCreateBean(BeanDefinition beanDefinition) throws Exception;
+    protected Object doCreateBean(BeanDefinition beanDefinition) throws Exception {
+        Object bean = createBeanInstance(beanDefinition);
+        beanDefinition.setBean(bean);
+        applyPropertyValues(bean, beanDefinition);
+        return bean;
+    }
+
+    protected void applyPropertyValues(Object bean, BeanDefinition beanDefinition) throws Exception {
+    }
+
+    public void addBeanPostProcessor(BeanPostProcessor beanPostProcessor) {
+        this.beanPostProcessors.add(beanPostProcessor);
+    }
+
+    public List getBeansForType(Class type) throws Exception {
+        List beans = new ArrayList<>();
+        for (String beanDefinitionName : beanDefinitionNames) {
+            if (type.isAssignableFrom(beanDefinitionMap.get(beanDefinitionName).getBeanClass())) {
+                beans.add(getBean(beanDefinitionName));
+            }
+        }
+
+        return beans;
+    }
 }
