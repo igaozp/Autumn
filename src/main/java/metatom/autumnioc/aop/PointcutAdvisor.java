@@ -5,6 +5,6 @@ package metatom.autumnioc.aop;
  *
  * @author igaozp
  */
-public interface PointcutAdvisor {
+public interface PointcutAdvisor extends Advisor {
     Pointcut getPointcut();
 }

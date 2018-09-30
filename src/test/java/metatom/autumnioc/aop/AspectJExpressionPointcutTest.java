@@ -12,7 +12,7 @@ import org.junit.Test;
  */
 public class AspectJExpressionPointcutTest {
     @Test
-    public void testClassFilter() throws Exception {
+    public void testClassFilter() {
         String expression = "execution(* metatom.autumnioc.*.*(..))";
         AspectJExpressionPointcut aspectJExpressionPointcut = new AspectJExpressionPointcut();
         aspectJExpressionPointcut.setExpression(expression);

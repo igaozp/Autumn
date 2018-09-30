@@ -6,15 +6,15 @@ package metatom.autumnioc.aop;
  * @author igaozp
  */
 public class TargetSource {
-    private Class targetClass;
+    private Class<?>[] targetClass;
     private Object target;
 
-    public TargetSource(Object target, Class<?> targetClass) {
+    public TargetSource(Object target, Class<?>... targetClass) {
         this.target = target;
         this.targetClass = targetClass;
     }
 
-    public Class getTargetClass() {
+    public Class<?>[] getTargetClass() {
         return this.targetClass;
     }
 
