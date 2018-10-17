@@ -6,14 +6,14 @@
 
     <bean id="outputService" class="metatom.autumnioc.OutputServiceImpl"/>
 
-    <bean name="helloWorldService" class="metatom.autumnioc.HelloWorldServiceImpl">
+    <bean id="helloWorldService" class="metatom.autumnioc.HelloWorldServiceImpl">
         <property name="text" value="Hello World!"/>
         <property name="outputService" ref="outputService"/>
     </bean>
 
-    <bean id="timeInterceptor" class="metatom.autumnioc.aop.TimerInterceptor"/>
-
     <bean id="autoProxyCreator" class="metatom.autumnioc.aop.AspectJAwareAdvisorAutoProxyCreator"/>
+
+    <bean id="timeInterceptor" class="metatom.autumnioc.aop.TimerInterceptor"/>
 
     <bean id="aspectAspect" class="metatom.autumnioc.aop.AspectJExpressionPointcutAdvisor">
         <property name="advice" ref="timeInterceptor"/>

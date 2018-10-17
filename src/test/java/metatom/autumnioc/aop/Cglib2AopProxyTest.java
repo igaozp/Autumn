@@ -6,22 +6,18 @@ import metatom.autumnioc.context.ApplicationContext;
 import metatom.autumnioc.context.ClassPathXmlApplicationContext;
 import org.junit.Test;
 
-/**
- * JdkDynamicAopProxyTest
- *
- * @author igaozp
- */
-public class JdkDynamicAopProxyTest {
+public class Cglib2AopProxyTest {
     @Test
     public void testInterceptor() throws Exception {
-        // 基于 IOC 调用
+        // 不使用 AOP 调用
         ApplicationContext applicationContext = new ClassPathXmlApplicationContext("autumnioc.xml");
         HelloWorldService helloWorldService = (HelloWorldService) applicationContext.getBean("helloWorldService");
         helloWorldService.helloWorld();
 
-        // 设置被代理对象
+        // 使用 AOP
+        // 设置被代理的对象
         AdvisedSupport advisedSupport = new AdvisedSupport();
-        TargetSource targetSource = new TargetSource(helloWorldService, HelloWorldServiceImpl.class,HelloWorldService.class);
+        TargetSource targetSource = new TargetSource(helloWorldService, HelloWorldServiceImpl.class, HelloWorldService.class);
         advisedSupport.setTargetSource(targetSource);
 
         // 设置拦截器
@@ -29,10 +25,10 @@ public class JdkDynamicAopProxyTest {
         advisedSupport.setMethodInterceptor(timerInterceptor);
 
         // 创建代理
-        JdkDynamicAopProxy jdkDynamicAopProxy = new JdkDynamicAopProxy(advisedSupport);
-        HelloWorldService helloWorldServiceProxy = (HelloWorldService) jdkDynamicAopProxy.getProxy();
+        Cglib2AopProxy cglib2AopProxy = new Cglib2AopProxy(advisedSupport);
+        HelloWorldService helloWorldServiceProxy = (HelloWorldService) cglib2AopProxy.getProxy();
 
-        // 基于 AOP 调用
+        // 基于 AOP 的调用
         helloWorldServiceProxy.helloWorld();
     }
 }

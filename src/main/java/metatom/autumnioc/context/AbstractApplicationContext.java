@@ -23,6 +23,12 @@ public abstract class AbstractApplicationContext implements ApplicationContext {
         onRefresh();
     }
 
+    /**
+     * 加载 Bean 的定义
+     *
+     * @param beanFactory Bean Factory
+     * @throws Exception 异常
+     */
     protected abstract void loadBeanDefinitions(AbstractBeanFactory beanFactory) throws Exception;
 
     protected void registerBeanPostProcessors(AbstractBeanFactory beanFactory) throws Exception {

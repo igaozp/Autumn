@@ -56,7 +56,7 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
     }
 
     protected void processBeanDefinition(Element element) {
-        String name = element.getAttribute("name");
+        String name = element.getAttribute("id");
         String className = element.getAttribute("class");
         BeanDefinition beanDefinition = new BeanDefinition();
         processProperty(element, beanDefinition);
@@ -77,7 +77,8 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
                 } else {
                     String ref = propertyElement.getAttribute("ref");
                     if (ref == null || ref.length() == 0) {
-                        throw new IllegalArgumentException("Configuration problem: <property> element for property '" + name + "' must specify a ref or value");
+                        throw new IllegalArgumentException("Configuration problem: <property> element for property '"
+                                + name + "' must specify a ref or value");
                     }
                     BeanReference beanReference = new BeanReference(ref);
                     beanDefinition.getPropertyValues().addPropertyValue(new PropertyValue(name, beanReference));
