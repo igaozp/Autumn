@@ -1,17 +1,19 @@
 package metatom.autumnioc.beans;
 
+import lombok.Getter;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * PropertyValues
+ * PropertyValues Bean 的属性列表
  *
  * @author igaozp
  */
 public class PropertyValues {
     private final List<PropertyValue> propertyValueList = new ArrayList<>();
 
-    public PropertyValues() {
+    PropertyValues() {
     }
 
     public void addPropertyValue(PropertyValue propertyValue) {

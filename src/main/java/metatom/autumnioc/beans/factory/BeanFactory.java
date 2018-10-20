@@ -1,7 +1,7 @@
 package metatom.autumnioc.beans.factory;
 
 /**
- * BeanFactory
+ * BeanFactory Bean 工厂
  *
  * @author igaozp
  */

@@ -6,6 +6,11 @@ import metatom.autumnioc.context.ApplicationContext;
 import metatom.autumnioc.context.ClassPathXmlApplicationContext;
 import org.junit.Test;
 
+/**
+ * CglibAopProxyTest
+ *
+ * @author igaozp
+ */
 public class Cglib2AopProxyTest {
     @Test
     public void testInterceptor() throws Exception {
@@ -14,7 +19,7 @@ public class Cglib2AopProxyTest {
         HelloWorldService helloWorldService = (HelloWorldService) applicationContext.getBean("helloWorldService");
         helloWorldService.helloWorld();
 
-        // 使用 AOP
+        // 使用 AOP 调用
         // 设置被代理的对象
         AdvisedSupport advisedSupport = new AdvisedSupport();
         TargetSource targetSource = new TargetSource(helloWorldService, HelloWorldServiceImpl.class, HelloWorldService.class);

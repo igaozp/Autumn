@@ -1,5 +1,6 @@
 package metatom.autumnioc.aop;
 
+import lombok.Data;
 import org.aopalliance.intercept.MethodInterceptor;
 
 /**
@@ -7,32 +8,18 @@ import org.aopalliance.intercept.MethodInterceptor;
  *
  * @author igaozp
  */
-public class AdvisedSupport {
+@Data
+class AdvisedSupport {
+    /**
+     * 被代理的对象
+     */
     private TargetSource targetSource;
+    /**
+     * 方法拦截器
+     */
     private MethodInterceptor methodInterceptor;
+    /**
+     * 方法匹配器
+     */
     private MethodMatcher methodMatcher;
-
-    public TargetSource getTargetSource() {
-        return this.targetSource;
-    }
-
-    public void setTargetSource(TargetSource targetSource) {
-        this.targetSource = targetSource;
-    }
-
-    public MethodInterceptor getMethodInterceptor() {
-        return this.methodInterceptor;
-    }
-
-    public void setMethodInterceptor(MethodInterceptor methodInterceptor) {
-        this.methodInterceptor = methodInterceptor;
-    }
-
-    public MethodMatcher getMethodMatcher() {
-        return methodMatcher;
-    }
-
-    public void setMethodMatcher(MethodMatcher methodMatcher) {
-        this.methodMatcher = methodMatcher;
-    }
 }

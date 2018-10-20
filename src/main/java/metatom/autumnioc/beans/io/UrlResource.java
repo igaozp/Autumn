@@ -13,7 +13,7 @@ import java.net.URLConnection;
 public class UrlResource implements Resource {
     private final URL url;
 
-    public UrlResource(URL url) {
+    UrlResource(URL url) {
         this.url = url;
     }
 

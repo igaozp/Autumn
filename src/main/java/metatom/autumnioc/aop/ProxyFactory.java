@@ -1,7 +1,7 @@
 package metatom.autumnioc.aop;
 
 /**
- * ProxyFactory
+ * ProxyFactory 代理工厂
  *
  * @author igaozp
  */
@@ -11,7 +11,7 @@ public class ProxyFactory extends AdvisedSupport implements AopProxy {
         return createProxy().getProxy();
     }
 
-    protected final AopProxy createProxy() {
+    private AopProxy createProxy() {
         return new Cglib2AopProxy(this);
     }
 }

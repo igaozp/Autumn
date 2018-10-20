@@ -1,14 +1,14 @@
 package metatom.autumnioc.aop;
 
 /**
- * AbstractAopProxy
+ * AbstractAopProxy 抽象 AOP 代理
  *
  * @author igaozp
  */
-public abstract class AbstractAopProxy implements AopProxy {
-    protected AdvisedSupport advised;
+abstract class AbstractAopProxy implements AopProxy {
+    AdvisedSupport advised;
 
-    public AbstractAopProxy(AdvisedSupport advised) {
+    AbstractAopProxy(AdvisedSupport advised) {
         this.advised = advised;
     }
 }

@@ -20,7 +20,7 @@ public class ClassPathXmlApplicationContext extends AbstractApplicationContext {
         this(configLocation, new AutowireCapableBeanFactory());
     }
 
-    public ClassPathXmlApplicationContext(String configLocation, AbstractBeanFactory beanFactory) throws Exception {
+    private ClassPathXmlApplicationContext(String configLocation, AbstractBeanFactory beanFactory) throws Exception {
         super(beanFactory);
         this.configLocation = configLocation;
         refresh();

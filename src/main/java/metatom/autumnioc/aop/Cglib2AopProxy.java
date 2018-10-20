@@ -6,8 +6,13 @@ import net.sf.cglib.proxy.MethodProxy;
 
 import java.lang.reflect.Method;
 
+/**
+ * CglibAopProxy
+ *
+ * @author igaozp
+ */
 public class Cglib2AopProxy extends AbstractAopProxy {
-    public Cglib2AopProxy(AdvisedSupport advised) {
+    Cglib2AopProxy(AdvisedSupport advised) {
         super(advised);
     }
 
@@ -17,8 +22,8 @@ public class Cglib2AopProxy extends AbstractAopProxy {
         enhancer.setSuperclass(advised.getTargetSource().getTargetClass());
         enhancer.setInterfaces(advised.getTargetSource().getInterfaces());
         enhancer.setCallback(new DynamicAdvisedInterceptor(advised));
-        Object enhanced = enhancer.create();
-        return enhanced;
+
+        return enhancer.create();
     }
 
     private static class DynamicAdvisedInterceptor implements MethodInterceptor {
@@ -32,17 +37,21 @@ public class Cglib2AopProxy extends AbstractAopProxy {
 
         @Override
         public Object intercept(Object o, Method method, Object[] objects, MethodProxy methodProxy) throws Throwable {
-            if (advised.getMethodMatcher() == null || advised.getMethodMatcher().matches(method, advised.getTargetSource().getTargetClass())) {
-                return delegateMethodInterceptor.invoke(new CglibMethodInvocation(advised.getTargetSource().getTarget(), method, objects, methodProxy));
+            if (advised.getMethodMatcher() == null ||
+                    advised.getMethodMatcher().matches(method, advised.getTargetSource().getTargetClass())) {
+
+                return delegateMethodInterceptor.invoke(new CglibMethodInvocation(
+                        advised.getTargetSource().getTarget(), method, objects, methodProxy));
             }
-            return new CglibMethodInvocation(advised.getTargetSource().getTarget(), method, objects, methodProxy).proceed();
+            return new CglibMethodInvocation(advised.getTargetSource().getTarget(),
+                    method, objects, methodProxy).proceed();
         }
     }
 
     private static class CglibMethodInvocation extends ReflectiveMethodInvocation {
         private final MethodProxy methodProxy;
 
-        public CglibMethodInvocation(Object target, Method method, Object[] args, MethodProxy methodProxy) {
+        CglibMethodInvocation(Object target, Method method, Object[] args, MethodProxy methodProxy) {
             super(target, method, args);
             this.methodProxy = methodProxy;
         }

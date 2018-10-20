@@ -15,9 +15,21 @@ import java.util.Set;
  * @author igaozp
  */
 public class AspectJExpressionPointcut implements Pointcut, ClassFilter, MethodMatcher {
+    /**
+     * 切点解析器
+     */
     private PointcutParser pointcutParser;
+    /**
+     * 表达式
+     */
     private String expression;
+    /**
+     * 切点表达式
+     */
     private PointcutExpression pointcutExpression;
+    /**
+     * 切点原语集合
+     */
     private static final Set<PointcutPrimitive> DEFAULT_SUPPORT_PRIMITIVES = new HashSet<>();
 
     static {
@@ -33,26 +45,15 @@ public class AspectJExpressionPointcut implements Pointcut, ClassFilter, MethodM
         DEFAULT_SUPPORT_PRIMITIVES.add(PointcutPrimitive.AT_TARGET);
     }
 
-    public AspectJExpressionPointcut() {
+    AspectJExpressionPointcut() {
         this(DEFAULT_SUPPORT_PRIMITIVES);
     }
 
-    public AspectJExpressionPointcut(Set<PointcutPrimitive> pointcutPrimitives) {
-        pointcutParser = PointcutParser.getPointcutParserSupportingSpecifiedPrimitivesAndUsingContextClassloaderForResolution(pointcutPrimitives);
-    }
-
-    protected void checkReadyToMatch() {
-        if (pointcutExpression == null) {
-            pointcutExpression = buildPointcutExpression();
-        }
-    }
-
-    private PointcutExpression buildPointcutExpression() {
-        return pointcutParser.parsePointcutExpression(expression);
-    }
-
-    public void setExpression(String expression) {
-        this.expression = expression;
+    private AspectJExpressionPointcut(Set<PointcutPrimitive> pointcutPrimitives) {
+        // 通过切点原语集合获取切点解析器
+        pointcutParser = PointcutParser.
+                getPointcutParserSupportingSpecifiedPrimitivesAndUsingContextClassloaderForResolution
+                        (pointcutPrimitives);
     }
 
     @Override
@@ -71,6 +72,29 @@ public class AspectJExpressionPointcut implements Pointcut, ClassFilter, MethodM
             return false;
         }
         return false;
+    }
+
+    /**
+     * 检查准备匹配
+     */
+    private void checkReadyToMatch() {
+        // 若没有切点表达式则生成切点表达式
+        if (pointcutExpression == null) {
+            pointcutExpression = buildPointcutExpression();
+        }
+    }
+
+    /**
+     * 构建切点表达式
+     *
+     * @return 切点表达式
+     */
+    private PointcutExpression buildPointcutExpression() {
+        return pointcutParser.parsePointcutExpression(expression);
+    }
+
+    void setExpression(String expression) {
+        this.expression = expression;
     }
 
     @Override

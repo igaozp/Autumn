@@ -3,7 +3,6 @@ package metatom.autumnioc;
 import metatom.autumnioc.beans.BeanDefinition;
 import metatom.autumnioc.beans.factory.AbstractBeanFactory;
 import metatom.autumnioc.beans.factory.AutowireCapableBeanFactory;
-import metatom.autumnioc.beans.factory.BeanFactory;
 import metatom.autumnioc.beans.io.ResourceLoader;
 import metatom.autumnioc.beans.xml.XmlBeanDefinitionReader;
 import org.junit.Test;

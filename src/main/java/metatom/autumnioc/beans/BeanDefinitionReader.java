@@ -7,7 +7,7 @@ package metatom.autumnioc.beans;
  */
 public interface BeanDefinitionReader {
     /**
-     * 通过路径加载 Bean 的配置文件
+     * 通过路径加载 Bean 的定义配置文件
      *
      * @param location 资源路径
      * @throws Exception 抛出异常

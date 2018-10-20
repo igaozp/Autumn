@@ -3,7 +3,7 @@ package metatom.autumnioc.aop;
 import metatom.autumnioc.beans.factory.BeanFactory;
 
 /**
- * BeanFactoryAware
+ * BeanFactoryAware 感知 Bean 工厂
  *
  * @author igaozp
  */

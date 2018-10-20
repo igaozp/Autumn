@@ -11,13 +11,18 @@ import java.util.List;
  * @author igaozp
  */
 public abstract class AbstractApplicationContext implements ApplicationContext {
-    protected AbstractBeanFactory beanFactory;
+    private AbstractBeanFactory beanFactory;
 
-    public AbstractApplicationContext(AbstractBeanFactory beanFactory) {
+    AbstractApplicationContext(AbstractBeanFactory beanFactory) {
         this.beanFactory = beanFactory;
     }
 
-    public void refresh() throws Exception {
+    /**
+     * 创建加载相关配置
+     *
+     * @throws Exception 异常
+     */
+    void refresh() throws Exception {
         loadBeanDefinitions(beanFactory);
         registerBeanPostProcessors(beanFactory);
         onRefresh();
@@ -31,14 +36,26 @@ public abstract class AbstractApplicationContext implements ApplicationContext {
      */
     protected abstract void loadBeanDefinitions(AbstractBeanFactory beanFactory) throws Exception;
 
-    protected void registerBeanPostProcessors(AbstractBeanFactory beanFactory) throws Exception {
+    /**
+     * 注册 Bean 的处理器
+     *
+     * @param beanFactory Bean 工厂实例
+     * @throws Exception 异常
+     */
+    private void registerBeanPostProcessors(AbstractBeanFactory beanFactory) throws Exception {
+        // 获取处理器
         List beanPostProcessors = beanFactory.getBeansForType(BeanPostProcessor.class);
         for (Object beanPostProcessor : beanPostProcessors) {
             beanFactory.addBeanPostProcessor((BeanPostProcessor) beanPostProcessor);
         }
     }
 
-    protected void onRefresh() throws Exception {
+    /**
+     * 扩展初始化其他 Bean
+     *
+     * @throws Exception 异常
+     */
+    private void onRefresh() throws Exception {
         beanFactory.preInstantiateSingletons();
     }
 
