@@ -1,13 +1,10 @@
 package metatom.autumnioc.aop;
 
-import lombok.Getter;
-
 /**
  * TargetSource 被代理的对象
  *
  * @author igaozp
  */
-@Getter
 class TargetSource {
     /**
      * 对象的类型
@@ -25,6 +22,30 @@ class TargetSource {
     public TargetSource(Object target, Class<?> targetClass, Class<?>... interfaces) {
         this.target = target;
         this.targetClass = targetClass;
+        this.interfaces = interfaces;
+    }
+
+    public Class<?> getTargetClass() {
+        return targetClass;
+    }
+
+    public void setTargetClass(Class<?> targetClass) {
+        this.targetClass = targetClass;
+    }
+
+    public Object getTarget() {
+        return target;
+    }
+
+    public void setTarget(Object target) {
+        this.target = target;
+    }
+
+    public Class<?>[] getInterfaces() {
+        return interfaces;
+    }
+
+    public void setInterfaces(Class<?>[] interfaces) {
         this.interfaces = interfaces;
     }
 }

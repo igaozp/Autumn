@@ -1,6 +1,5 @@
 package metatom.autumnioc.aop;
 
-import lombok.Data;
 import org.aopalliance.intercept.MethodInvocation;
 
 import java.lang.reflect.AccessibleObject;
@@ -11,7 +10,6 @@ import java.lang.reflect.Method;
  *
  * @author igaozp
  */
-@Data
 public class ReflectiveMethodInvocation implements MethodInvocation {
     /**
      * 目标对象
@@ -45,5 +43,31 @@ public class ReflectiveMethodInvocation implements MethodInvocation {
     @Override
     public Object proceed() throws Throwable {
         return method.invoke(target, arguments);
+    }
+
+    public Object getTarget() {
+        return target;
+    }
+
+    public void setTarget(Object target) {
+        this.target = target;
+    }
+
+    @Override
+    public Method getMethod() {
+        return method;
+    }
+
+    public void setMethod(Method method) {
+        this.method = method;
+    }
+
+    @Override
+    public Object[] getArguments() {
+        return arguments;
+    }
+
+    public void setArguments(Object[] arguments) {
+        this.arguments = arguments;
     }
 }

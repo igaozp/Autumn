@@ -1,15 +1,10 @@
 package metatom.autumnioc.beans;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 /**
  * BeanDefinition Bean 的定义结构
  *
  * @author igaozp
  */
-@Data
-@NoArgsConstructor
 public class BeanDefinition {
     private Object bean;
     private Class beanClass;
@@ -28,5 +23,36 @@ public class BeanDefinition {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
+    }
+
+    public BeanDefinition() {
+    }
+
+    public Object getBean() {
+        return bean;
+    }
+
+    public void setBean(Object bean) {
+        this.bean = bean;
+    }
+
+    public Class getBeanClass() {
+        return beanClass;
+    }
+
+    public void setBeanClass(Class beanClass) {
+        this.beanClass = beanClass;
+    }
+
+    public String getBeanClassName() {
+        return beanClassName;
+    }
+
+    public PropertyValues getPropertyValues() {
+        return propertyValues;
+    }
+
+    public void setPropertyValues(PropertyValues propertyValues) {
+        this.propertyValues = propertyValues;
     }
 }

@@ -1,6 +1,5 @@
 package metatom.autumnioc.aop;
 
-import lombok.Data;
 import org.aopalliance.aop.Advice;
 
 /**
@@ -8,12 +7,29 @@ import org.aopalliance.aop.Advice;
  *
  * @author igaozp
  */
-@Data
 public class AspectJExpressionPointcutAdvisor implements PointcutAdvisor {
     private AspectJExpressionPointcut pointcut = new AspectJExpressionPointcut();
     private Advice advice;
 
     public void setExpression(String expression) {
         this.pointcut.setExpression(expression);
+    }
+
+    @Override
+    public AspectJExpressionPointcut getPointcut() {
+        return pointcut;
+    }
+
+    public void setPointcut(AspectJExpressionPointcut pointcut) {
+        this.pointcut = pointcut;
+    }
+
+    @Override
+    public Advice getAdvice() {
+        return advice;
+    }
+
+    public void setAdvice(Advice advice) {
+        this.advice = advice;
     }
 }
